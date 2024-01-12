@@ -20,4 +20,6 @@ listint_t *insert_node(listint_t **head, int number) {
             new_node = new_node->next;
         };
     };
+
+    return (new_node);
 }
