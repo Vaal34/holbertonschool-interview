@@ -4,7 +4,7 @@ Minimum Operations
 """
 
 def minOperations(number):
-    
+ 
     if number <= 1:
         return 0
 
