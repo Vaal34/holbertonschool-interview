@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Minimum Operations
+"""
+
 
 def minOperations(number):
     res = 0
