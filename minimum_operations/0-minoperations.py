@@ -3,13 +3,18 @@
 Minimum Operations
 """
 
-
 def minOperations(number):
-    res = 0
-    i = 2
-    while i <= number:
-        while number % i == 0:
-            res += 1
-            number = number // i
-        i += 1
-    return res
+    
+    if number <= 1:
+        return 0
+
+    total_operations = 0
+    divisor = 2
+
+    while divisor <= number:
+        while number % divisor == 0:
+            total_operations += divisor
+            number //= divisor
+        divisor += 1
+
+    return total_operations
