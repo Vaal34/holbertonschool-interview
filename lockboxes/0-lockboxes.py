@@ -1,8 +1,12 @@
 #!/usr/bin/python3
+"""
+Lockboxes
+"""
 
 from collections import deque
 
 def canUnlockAll(boxes):
+    """ Lockboxes """
     if not boxes:
         return False
 
