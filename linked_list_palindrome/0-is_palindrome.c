@@ -18,7 +18,7 @@ int is_palindrome(listint_t **head) {
     temp = *head;
 
     if (*head == NULL) {
-        return (1);
+        return 1    ;
     }
 
     while ((*head)->next != NULL) {
@@ -29,7 +29,9 @@ int is_palindrome(listint_t **head) {
     *head = temp;
 
     if (length_list % 2 != 0) {
-        return (0);
+        return 0;
+    } else if (length_list == 1) {
+        return 1
     }
 
     First_part = (int *)malloc((length_list / 2) * sizeof(int));
