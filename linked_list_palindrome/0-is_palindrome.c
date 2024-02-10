@@ -27,10 +27,7 @@ int is_palindrome(listint_t **head) {
     }
 
     *head = temp;
-
-    if (length_list % 2 != 0) {
-        return 0;
-    } else if (length_list == 1) {
+    if (length_list == 1) {
         return 1;
     }
 
