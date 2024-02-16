@@ -1,18 +1,23 @@
 #!/usr/bin/python3
-
+""" Document """
 import sys
 import signal
 
+
 # Define signal handler to catch keyboard interruption
 def signal_handler(sig, frame):
+    """ signal handler """
     print_statistics()
     sys.exit(0)
 
+
 # Function to print statistics
 def print_statistics():
+    """ print statistics """
     print("Total file size:", total_file_size)
     for code in sorted(status_codes.keys()):
         print(f"{code}: {status_codes[code]}")
+
 
 # Initialize variables
 total_file_size = 0
