@@ -1,64 +1,47 @@
 #!/usr/bin/python3
-""" Document stats """
-import sys
-import signal
+""" script that reads stdin line by line and computes metrics """
 
+if __name__ == '__main__':
 
-# Define signal handler to catch keyboard interruption
-def signal_handler(sig, frame):
-    """ signal handler """
-    print_statistics()
-    sys.exit(0)
+    import sys
 
+    def print_results(statusCodes, fileSize):
+        """ Print statistics """
+        print("File size: {:d}".format(fileSize))
+        for statusCode, times in sorted(statusCodes.items()):
+            if times:
+                print("{:s}: {:d}".format(statusCode, times))
 
-# Function to print statistics
-def print_statistics():
-    """ print statistics """
-    print("Total file size:", total_file_size)
-    for code in sorted(status_codes.keys()):
-        print(f"{code}: {status_codes[code]}")
+    statusCodes = {"200": 0,
+                   "301": 0,
+                   "400": 0,
+                   "401": 0,
+                   "403": 0,
+                   "404": 0,
+                   "405": 0,
+                   "500": 0
+                   }
+    fileSize = 0
+    n_lines = 0
 
-
-# Initialize variables
-total_file_size = 0
-status_codes = {
-    200: 0,
-    301: 0,
-    400: 0,
-    401: 0,
-    403: 0,
-    404: 0,
-    405: 0,
-    500: 0
-}
-line_count = 0
-
-# Register the signal handler
-signal.signal(signal.SIGINT, signal_handler)
-
-try:
-    """ try """
-    # Process input line by line
-    for line in sys.stdin:
-        line_count += 1
-        # Split the line by space
-        parts = line.split()
-        if len(parts) >= 7:
-            # Extract status code and file size
-            status_code = parts[-2]
-            file_size = int(parts[-1])
-            # Update total file size
-            total_file_size += file_size
-            # Update status code count
-            if status_code.isdigit():
-                status_codes[int(status_code)] += 1
-
-        # Print statistics every 10 lines
-        if line_count % 10 == 0:
-            print_statistics()
-            print()
-
-except KeyboardInterrupt:
-    """ except """
-    # If interrupted by keyboard, print final statistics
-    print_statistics()
+    try:
+        """ Read stdin line by line """
+        for line in sys.stdin:
+            if n_lines != 0 and n_lines % 10 == 0:
+                """ After every 10 lines, print from the beginning """
+                print_results(statusCodes, fileSize)
+            n_lines += 1
+            data = line.split()
+            try:
+                """ Compute metrics """
+                statusCode = data[-2]
+                if statusCode in statusCodes:
+                    statusCodes[statusCode] += 1
+                fileSize += int(data[-1])
+            except:
+                pass
+        print_results(statusCodes, fileSize)
+    except KeyboardInterrupt:
+        """ Keyboard interruption, print from the beginning """
+        print_results(statusCodes, fileSize)
+        raise
