@@ -42,6 +42,6 @@ if __name__ == '__main__':
                 pass
         print_results(statusCodes, fileSize)
     except KeyboardInterrupt:
-        """ Keyboard interruption, print from the beginning """
+        """Keyboard interruption, print from the beginning """
         print_results(statusCodes, fileSize)
         raise
