@@ -37,6 +37,7 @@ line_count = 0
 signal.signal(signal.SIGINT, signal_handler)
 
 try:
+    """ try """
     # Process input line by line
     for line in sys.stdin:
         line_count += 1
@@ -58,5 +59,6 @@ try:
             print()
 
 except KeyboardInterrupt:
+    """ except """
     # If interrupted by keyboard, print final statistics
     print_statistics()
