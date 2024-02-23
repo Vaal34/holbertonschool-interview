@@ -9,11 +9,12 @@
 #include "lists.h"
 
 int check_cycle(listint_t *list) {
+    listint_t *before = list;
+    listint_t *after = list->next;
+    
     if (list == NULL || list->next == NULL)
         return 0;
     
-    listint_t *before = list;
-    listint_t *after = list->next;
 
     while (after != NULL && after->next != NULL) {
         if (before == after)
