@@ -12,19 +12,17 @@ int is_palindrome(unsigned long n)
 {
     int len_ul = 0;
     unsigned long tmp = n;
+    int i = 0;
+    char str[10000];
+
     while(tmp != 0)
     { 
         len_ul++;
         tmp/=10; 
     }
-    printf("string is: %i \n", len_ul); 
 
-    char str[len_ul]; 
     sprintf(str, "%ld", n); 
-    printf("---%s---\n", str);
 
-
-    int i = 0;
     while(i < (len_ul / 2)){
         if(str[i] != str[len_ul - 1]){
             return 0;
