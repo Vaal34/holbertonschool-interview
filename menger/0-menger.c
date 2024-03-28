@@ -1,32 +1,42 @@
-#include <stdio.h>
-#include <math.h>
+#include "menger.h"
 
-void drawMenger(int level, int x, int y, int size) {
-    int i, j; // Declaring variables at the beginning of the block
-    if (level == 0) {
-        printf("#");
-        return;
-    }
-    int newSize = size / 3;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
-            if (i == 1 && j == 1)
-                printf(" ");
-            else
-                drawMenger(level - 1, x + i * newSize, y + j * newSize, newSize);
-        }
-    }
+/**
+ * check_char - Checks space for block.
+ * @column: Is the column.
+ * @row: Is the row.
+ *
+ * Return: # or space.
+ */
+char check_char(int column, int row)
+{
+	while (column > 0 || row > 0)
+	{
+		if (column % 3 == 1 && row % 3 == 1)
+			return (' ');
+		column /= 3;
+		row /= 3;
+	}
+	return ('#');
 }
 
-void menger(int level) {
-    if (level < 0)
-        return;
-    int i, j; // Declaring variables at the beginning of the block
-    int size = (int)pow(3, level);
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
-            drawMenger(level, i, j, size);
-        }
-        printf("\n");
-    }
+/**
+ * menger - Function that draws a 2D Menger Sponge.
+ * @level: Is the level of the Menger Sponge to draw.
+ *
+ * Return: Void.
+ */
+void menger(int level)
+{
+	int size, i, j;
+
+	if (level < 0)
+		return;
+
+	size = pow(3, level);
+	for (i = 0; i < size; i++)
+	{
+		for (j = 0; j < size; j++)
+			printf("%c", check_char(i, j));
+		printf("\n");
+	}
 }
