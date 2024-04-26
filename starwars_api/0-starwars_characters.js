@@ -19,11 +19,11 @@ function getCharacterName(url) {
   });
 }
 
-async function fetchApi(url) {
+async function fetchApi (url) {
   try {
     const filmData = await new Promise((resolve, reject) => {
       request(url, { json: true }, (error, response, body) => {
-        if (error) {
+        if(error) {
           reject(error);
         } else if (response.statusCode !== 200) {
           reject(new Error(`Failed to get film data: ${response.statusCode}`));
