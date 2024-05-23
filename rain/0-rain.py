@@ -1,7 +1,11 @@
 #!/usr/bin/python3
+"""
+rain Algorithm
+"""
 
 
 def rain(walls):
+    """ rain Algorithm """
     ecart = 0
     wall1 = 0
     eau = 0
