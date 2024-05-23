@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+
+
 def rain(walls):
     ecart = 0
     wall1 = 0
