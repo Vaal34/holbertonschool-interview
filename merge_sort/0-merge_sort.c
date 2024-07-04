@@ -68,10 +68,17 @@ void merge_sort(int *array, size_t size)
     free(right);
 }
 
-void print_array(int *array, size_t size)
+void print_array(const int *array, size_t size)
 {
-    for (size_t i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
+	size_t i;
+
+	i = 0;
+	while (array && i < size)
+	{
+		if (i > 0)
+			printf(", ");
+		printf("%d", array[i]);
+		++i;
+	}
+	printf("\n");
 }
