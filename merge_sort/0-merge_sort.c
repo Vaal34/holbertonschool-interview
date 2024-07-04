@@ -1,26 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void merge(int *array, int *left, int left_size, int *right, int right_size);
-void merge_sort(int *array, size_t size);
-void print_array(int *array, size_t size);
-
-int main(void)
-{
-    int array[] = {38, 27, 43, 3, 9, 82, 10};
-    size_t n = sizeof(array) / sizeof(array[0]);
-
-    printf("Original array:\n");
-    print_array(array, n);
-
-    merge_sort(array, n);
-
-    printf("Sorted array:\n");
-    print_array(array, n);
-
-    return 0;
-}
-
 void merge(int *array, int *left, int left_size, int *right, int right_size)
 {
     int i = 0, j = 0, k = 0;
