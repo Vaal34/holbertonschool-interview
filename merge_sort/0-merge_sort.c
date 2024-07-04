@@ -31,25 +31,40 @@ void merge(int *array, int *left, int left_size, int *right, int right_size)
 
 void merge_sort(int *array, size_t size)
 {
-    if (size < 2) {
+    int mid, i;
+    int *left, *right;
+    size_t left_size, right_size;
+
+    if (size < 2)
+        return;
+
+    mid = size / 2;
+    left_size = mid;
+    right_size = size - mid;
+
+    left = malloc(left_size * sizeof(int));
+    right = malloc(right_size * sizeof(int));
+
+    /* Ensure malloc succeeded */
+    if (!left || !right) {
+        /* Handle memory allocation failure */
+        free(left);
+        free(right);
         return;
     }
 
-    int mid = size / 2;
-    int *left = (int *)malloc(mid * sizeof(int));
-    int *right = (int *)malloc((size - mid) * sizeof(int));
-
-    for (int i = 0; i < mid; i++) {
+    for (i = 0; i < mid; i++) {
         left[i] = array[i];
     }
 
-    for (int i = mid; i < size; i++) {
+    for (i = mid; i < size; i++) {
         right[i - mid] = array[i];
     }
 
-    merge_sort(left, mid);
-    merge_sort(right, size - mid);
-    merge(array, left, mid, right, size - mid);
+    merge_sort(left, left_size);
+    merge_sort(right, right_size);
+
+    merge(array, left, left_size, right, right_size);
 
     free(left);
     free(right);
